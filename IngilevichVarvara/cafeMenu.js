@@ -2,21 +2,21 @@
 
 //Hamburgers
 //Hamburger types of size
-Hamburger.SIZE_SMALL = {name: "SMALL" , price: 50, calories: 20, type: "hamburger"};
-Hamburger.SIZE_LARGE = {name: "SMALL" , price: 100, calories: 40, type: "hamburger"};
+Hamburger.SIZE_SMALL = {name: "SMALL", price: 50, calories: 20, type: "hamburger"};
+Hamburger.SIZE_LARGE = {name: "SMALL", price: 100, calories: 40, type: "hamburger"};
 
 //Hamburger types of stuffing
-Hamburger.STUFFING_CHEESE = {name: "CHEESE" , price: 10, calories: 20, type: "stuffing"};
-Hamburger.STUFFING_SALAD = {name: "SALAD" , price: 20, calories: 5, type: "stuffing"};
-Hamburger.STUFFING_POTATO = {name: "POTATO" , price: 15, calories: 10, type: "stuffing"};
+Hamburger.STUFFING_CHEESE = {name: "CHEESE", price: 10, calories: 20, type: "stuffing"};
+Hamburger.STUFFING_SALAD = {name: "SALAD", price: 20, calories: 5, type: "stuffing"};
+Hamburger.STUFFING_POTATO = {name: "POTATO", price: 15, calories: 10, type: "stuffing"};
 
 //Salads
-Salad.CESAR = {name: "CESAR" , price: 100, calories: 20};
-Salad.OLIVIER = {name: "OLIVIER" , price: 50, calories: 80};
+Salad.CESAR = {name: "CESAR", price: 100, calories: 20};
+Salad.OLIVIER = {name: "OLIVIER", price: 50, calories: 80};
 
 // Drinks
-Drink.COLA = {name: "COLA" , price: 50, calories: 40};
-Drink.COFFEE = {name: "COFFEE" , price: 80, calories: 20};
+Drink.COLA = {name: "COLA", price: 50, calories: 40};
+Drink.COFFEE = {name: "COFFEE", price: 80, calories: 20};
 
 
 function MenuItem(price, calories) {
@@ -28,7 +28,7 @@ function MenuItem(price, calories) {
  * Узнать цену гамбургера
  * @return {Number} Цена в тугриках
  */
-MenuItem.prototype.calculatePrice  = function () {
+MenuItem.prototype.calculatePrice = function () {
     return this.price;
 };
 
@@ -36,7 +36,7 @@ MenuItem.prototype.calculatePrice  = function () {
  * Узнать калорийность
  * @return {Number} Калорийность в калориях
  */
-MenuItem.prototype.calculateCalories = function() {
+MenuItem.prototype.calculateCalories = function () {
     return this.calories;
 };
 
@@ -44,15 +44,15 @@ MenuItem.prototype.calculateCalories = function() {
 //Hamburger
 function Hamburger(size, stuffing) {
     if (arguments.length > 2) {
-        throw new Error ("You have provided too much information about the hamburger. Please specify size and stuffing only.");
+        throw new Error("You have provided too much information about the hamburger. Please specify size and stuffing only.");
     } else if (arguments.length === 0) {
-        throw new Error ("You have not specified size and stuffing of hamburger.");
+        throw new Error("You have not specified size and stuffing of hamburger.");
     } else if (arguments.length === 1) {
         let provided_info = Array.prototype.slice.call(arguments)[0];
         if (provided_info.type === "hamburger") {
-            throw new Error ("You have not specified the information about the stuffing of hamburger!");
+            throw new Error("You have not specified the information about the stuffing of hamburger!");
         } else {
-            throw new Error ("You have not specified the information about the size of hamburger!");
+            throw new Error("You have not specified the information about the size of hamburger!");
         }
     } else {
         MenuItem.call(this);
@@ -70,18 +70,16 @@ Hamburger.prototype = Object.create(MenuItem.prototype);
 /**
  * Узнать размер гамбургера
  */
-Hamburger.prototype.getSize = function() {
+Hamburger.prototype.getSize = function () {
     return this.size;
 };
 
 /**
  * Узнать начинку гамбургера
  */
-Hamburger.prototype.getStuffing  = function() {
+Hamburger.prototype.getStuffing = function () {
     return this.stuffing;
 };
-
-
 
 
 //Salads
@@ -89,14 +87,14 @@ const ONE_UNIT_OF_SALAD_IN_GRAM = 100;
 
 function Salad(salad, grams) {
     if (arguments.length > 2) {
-        throw new Error ("You have provided too much information about the salad. Please specify salad and its weight in grams only.");
+        throw new Error("You have provided too much information about the salad. Please specify salad and its weight in grams only.");
     } else if (arguments.length === 0) {
-        throw new Error ("You have not specified salad and its weight in grams.");
+        throw new Error("You have not specified salad and its weight in grams.");
     } else if (arguments.length === 1) {
         if (typeof Array.prototype.slice.call(arguments)[0] === "object") {
-            throw new Error ("You have not specified the weight of the salad!")
+            throw new Error("You have not specified the weight of the salad!")
         } else {
-            throw new Error ("You have not specified the salad!")
+            throw new Error("You have not specified the salad!")
         }
     } else {
         MenuItem.call(this);
@@ -112,27 +110,26 @@ Salad.prototype = Object.create(MenuItem.prototype);
 /**
  * Узнать вес салата
  */
-Salad.prototype.getWeight = function() {
+Salad.prototype.getWeight = function () {
     return this.weight;
 };
 
 /**
  * Узнать название салата
  */
-Salad.prototype.getSaladName = function() {
+Salad.prototype.getSaladName = function () {
     return this.name;
 };
 
 //Drinks
 function Drink(drink) {
     if (arguments.length === 0) {
-        throw new Error ("You have not provided any information about the drink!");
+        throw new Error("You have not provided any information about the drink!");
     } else {
         MenuItem.call(this);
         this.price = drink.price;
         this.calories = drink.calories;
         this.name = drink.name;
-        this.paid = false;
     }
 }
 
@@ -141,7 +138,7 @@ Drink.prototype = Object.create(MenuItem.prototype);
 /**
  * Узнать название напитка
  */
-Drink.prototype.getDrinkName = function() {
+Drink.prototype.getDrinkName = function () {
     return this.name;
 };
 
@@ -152,21 +149,25 @@ function Order() {
 /**
  * Узнать цену заказа
  */
-Order.prototype.getOrderPrice = function() {
-    return this.orderItems.reduce(function(sum, currentItem) {return sum + currentItem.calculatePrice()}, 0);;
+Order.prototype.getOrderPrice = function () {
+    return this.orderItems.reduce(function (sum, currentItem) {
+        return sum + currentItem.calculatePrice()
+    }, 0);
 };
 
 /**
  * Узнать калории заказа
  */
-Order.prototype.getOrderCalories = function() {
-    return this.orderItems.reduce(function(sum, currentItem) {return sum + currentItem.calculateCalories()}, 0);
+Order.prototype.getOrderCalories = function () {
+    return this.orderItems.reduce(function (sum, currentItem) {
+        return sum + currentItem.calculateCalories()
+    }, 0);
 };
 
 /**
  * Добавить позицию в заказ
  */
-Order.prototype.addItem = function(item) {
+Order.prototype.addItem = function (item) {
     if (arguments.length > 0) {
         if (!this.paid) {
             this.orderItems.push(item);
@@ -181,7 +182,7 @@ Order.prototype.addItem = function(item) {
 /**
  * Удалить позицию из заказа
  */
-Order.prototype.removeItem = function(item) {
+Order.prototype.removeItem = function (item) {
     if (!this.paid) {
         let indexItem = this.orderItems.indexOf(item);
         if (indexItem > -1) {
@@ -197,18 +198,18 @@ Order.prototype.removeItem = function(item) {
 /**
  * Оплатить заказ
  */
-Order.prototype.pay = function() {
-  if (!this.paid) {
-      this.paid = true;
-  } else {
-      throw new Error("Your order has been already paid!");
-  }
+Order.prototype.pay = function () {
+    if (!this.paid) {
+        this.paid = true;
+    } else {
+        throw new Error("Your order has been already paid!");
+    }
 };
 
 /**
  * Узнать, оплачен ли заказ
  */
-Order.prototype.checkIfPaid = function() {
+Order.prototype.checkIfPaid = function () {
     if (this.paid) {
         return "Order is paid"
     } else {
